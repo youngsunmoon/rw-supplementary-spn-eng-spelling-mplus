@@ -1,0 +1,520 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+03/23/2026  10:12 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+    Figure 3: Sensitivity Check - Exclude program change
+
+  DATA:
+    FILE = Eng-SpnFinalData(drop_chdual).dat;
+
+  VARIABLE:
+    NAMES =
+      child_id sch_id d_female race d_hisp d_white d_asian d_g1farl d_g1el
+      d_g1serv d_g1sspe d_g1sld d_g1saut d_g1soth d_g1dual d_g3farl d_g3el
+      g3el_cat d_g3dual d_g3serv d_g3attr d_chdual g1engmis g1engsp g1engdl
+      g1engdlr g1engcs g1engtd g3engmis g3engsp g3engdl g3engdlr g3engcs
+      g3engtd g1spnmis g1spnsp g1spndl g1spndlr g1spncs g1spntd g3spnmis
+      g3spnsp g3spndl g3spndlr g3spncs g3spntd zg1engsp zg1engdl zg1engcs
+      zg1engtd zg3engsp zg3engdl zg3engcs zg3engtd zg1spnsp zg1spndl zg1spncs
+      zg1spntd zg3spnsp zg3spndl zg3spncs zg3spntd gender ethnic s_g1farl
+      s_g1serv s_g3serv;
+
+    USEVARIABLES =
+      g1engsp g3engsp g1spnsp g3spnsp d_g1el;
+
+    CLUSTER = sch_id;
+    MISSING ARE ALL (9999);
+
+  ANALYSIS:
+    TYPE = COMPLEX;
+    ESTIMATOR = MLR;
+    ITERATIONS = 10000;
+    CONVERGENCE = 0.001;
+
+  MODEL:
+    ! Cross-lagged effects
+    g3engsp ON g1engsp g1spnsp;
+    g3spnsp ON g1engsp g1spnsp;
+
+    ! Within-time covariances
+    g1engsp WITH g1spnsp;
+    g3engsp WITH g3spnsp;
+
+    ! Covariates
+    g1engsp g3engsp g1spnsp g3spnsp ON d_g1el;
+
+  OUTPUT:
+    STDYX MODINDICES SAMPSTAT;
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  1
+*** WARNING
+  Data set contains cases with missing on all variables except
+  x-variables.  These cases were not included in the analysis.
+  Number of cases with missing on all variables except x-variables:  1
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Figure 3: Sensitivity Check - Exclude program change
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         204
+
+Number of dependent variables                                    4
+Number of independent variables                                  1
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   G1ENGSP     G3ENGSP     G1SPNSP     G3SPNSP
+
+Observed independent variables
+   D_G1EL
+
+Variables with special functions
+
+  Cluster variable      SCH_ID
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                 10000
+Convergence criterion                                    0.100D-02
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  Eng-SpnFinalData(drop_chdual).dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             9
+     Number of clusters                          5
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        0.902
+ G3ENGSP        0.627         0.716
+ G1SPNSP        0.863         0.627         0.902
+ G3SPNSP        0.627         0.711         0.627         0.716
+ D_G1EL         0.902         0.716         0.902         0.716         1.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+                1.921         8.778         2.767         5.213         0.637
+
+
+           Covariances
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP       11.638
+ G3ENGSP        9.795        32.523
+ G1SPNSP        0.948         4.541         5.839
+ G3SPNSP       -0.971         6.334         5.072         9.453
+ D_G1EL        -0.463        -0.721        -0.054         0.099         0.231
+
+
+           Correlations
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        1.000
+ G3ENGSP        0.503         1.000
+ G1SPNSP        0.115         0.329         1.000
+ G3SPNSP       -0.093         0.361         0.683         1.000
+ D_G1EL        -0.282        -0.263        -0.047         0.067         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -1790.440
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     G1ENGSP               2.027       2.494       0.000   48.37%       0.000      0.000      1.000
+             184.000      11.516       6.473      18.000    0.54%       1.000      3.000
+     G3ENGSP               8.788      -0.006       0.000    4.11%       2.000      6.000      9.000
+             146.000      32.099      -1.417      18.000    3.42%      12.000     15.000
+     G1SPNSP               2.739       0.794       0.000   17.93%       1.000      1.000      2.000
+             184.000       5.812      -0.381       9.000    1.09%       3.000      5.000
+     G3SPNSP               5.445      -0.014       0.000    4.79%       2.000      4.000      5.000
+             146.000       9.685      -1.137      12.000    0.68%       7.000      9.000
+     D_G1EL                0.637      -0.571       0.000   36.27%       0.000      1.000      1.000
+             204.000       0.231      -1.674       1.000   63.73%       1.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+     THE STANDARD ERRORS OF THE MODEL PARAMETER ESTIMATES MAY NOT BE
+     TRUSTWORTHY FOR SOME PARAMETERS DUE TO A NON-POSITIVE DEFINITE
+     FIRST-ORDER DERIVATIVE PRODUCT MATRIX.  THIS MAY BE DUE TO THE STARTING
+     VALUES BUT MAY ALSO BE AN INDICATION OF MODEL NONIDENTIFICATION.  THE
+     CONDITION NUMBER IS      -0.289D-16.  PROBLEM INVOLVING THE FOLLOWING PARAMETER:
+     Parameter 5, G1ENGSP ON D_G1EL
+
+     THIS IS MOST LIKELY DUE TO HAVING MORE PARAMETERS THAN THE NUMBER
+     OF CLUSTERS MINUS THE NUMBER OF STRATA WITH MORE THAN ONE CLUSTER.
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       18
+
+Loglikelihood
+
+          H0 Value                       -1650.370
+          H0 Scaling Correction Factor      2.2536
+            for MLR
+          H1 Value                       -1650.370
+          H1 Scaling Correction Factor      2.2536
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    3336.740
+          Bayesian (BIC)                  3396.466
+          Sample-Size Adjusted BIC        3339.437
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.000
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            292.895
+          Degrees of Freedom                    10
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ G3ENGSP  ON
+    G1ENGSP            0.729      0.115      6.346      0.000
+    G1SPNSP            0.646      0.100      6.484      0.000
+    D_G1EL            -1.506      0.463     -3.252      0.001
+
+ G3SPNSP  ON
+    G1ENGSP           -0.142      0.032     -4.442      0.000
+    G1SPNSP            0.895      0.098      9.181      0.000
+    D_G1EL             0.353      0.320      1.103      0.270
+
+ G1ENGSP  ON
+    D_G1EL            -2.005      0.312     -6.419      0.000
+
+ G1SPNSP  ON
+    D_G1EL            -0.235      0.505     -0.465      0.642
+
+ G1ENGSP  WITH
+    G1SPNSP            0.841      0.537      1.566      0.117
+
+ G3ENGSP  WITH
+    G3SPNSP            3.924      0.750      5.233      0.000
+
+ Intercepts
+    G1ENGSP            3.197      0.698      4.581      0.000
+    G3ENGSP            6.550      1.125      5.825      0.000
+    G1SPNSP            2.917      0.453      6.439      0.000
+    G3SPNSP            2.784      0.418      6.653      0.000
+
+ Residual Variances
+    G1ENGSP           10.711      3.157      3.392      0.001
+    G3ENGSP           21.388      2.165      9.878      0.000
+    G1SPNSP            5.826      0.852      6.836      0.000
+    G3SPNSP            4.744      0.406     11.675      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.160E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ G3ENGSP  ON
+    G1ENGSP            0.436      0.074      5.885      0.000
+    G1SPNSP            0.273      0.047      5.814      0.000
+    D_G1EL            -0.127      0.035     -3.664      0.000
+
+ G3SPNSP  ON
+    G1ENGSP           -0.158      0.043     -3.633      0.000
+    G1SPNSP            0.703      0.047     15.045      0.000
+    D_G1EL             0.055      0.050      1.092      0.275
+
+ G1ENGSP  ON
+    D_G1EL            -0.283      0.046     -6.204      0.000
+
+ G1SPNSP  ON
+    D_G1EL            -0.047      0.099     -0.473      0.636
+
+ G1ENGSP  WITH
+    G1SPNSP            0.106      0.078      1.356      0.175
+
+ G3ENGSP  WITH
+    G3SPNSP            0.390      0.074      5.292      0.000
+
+ Intercepts
+    G1ENGSP            0.937      0.120      7.808      0.000
+    G3ENGSP            1.148      0.161      7.146      0.000
+    G1SPNSP            1.207      0.139      8.676      0.000
+    G3SPNSP            0.905      0.153      5.924      0.000
+
+ Residual Variances
+    G1ENGSP            0.920      0.026     35.755      0.000
+    G3ENGSP            0.657      0.064     10.233      0.000
+    G1SPNSP            0.998      0.009    107.940      0.000
+    G3SPNSP            0.502      0.060      8.328      0.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    G1ENGSP            0.080      0.026      3.102      0.002
+    G3ENGSP            0.343      0.064      5.338      0.000
+    G1SPNSP            0.002      0.009      0.237      0.813
+    G3SPNSP            0.498      0.060      8.277      0.000
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+ON Statements
+
+G1ENGSP  ON G1ENGSP              999.000     0.000      0.000        0.000
+G1ENGSP  ON G3ENGSP              999.000     0.000      0.000        0.000
+G1ENGSP  ON G1SPNSP              999.000     0.000      0.000        0.000
+G1ENGSP  ON G3SPNSP              999.000     0.000      0.000        0.000
+G3ENGSP  ON G3ENGSP              999.000     0.000      0.000        0.000
+G3ENGSP  ON G3SPNSP              999.000     0.000      0.000        0.000
+G1SPNSP  ON G1ENGSP              999.000     0.000      0.000        0.000
+G1SPNSP  ON G3ENGSP              999.000     0.000      0.000        0.000
+G1SPNSP  ON G3SPNSP              999.000     0.000      0.000        0.000
+G3SPNSP  ON G3SPNSP              999.000     0.000      0.000        0.000
+
+WITH Statements
+
+D_G1EL   WITH G1ENGSP            999.000     0.000      0.000        0.000
+D_G1EL   WITH G1SPNSP            999.000     0.000      0.000        0.000
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           LAMBDA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP            0             0             0             0             0
+ G3ENGSP            0             0             0             0             0
+ G1SPNSP            0             0             0             0             0
+ G3SPNSP            0             0             0             0             0
+ D_G1EL             0             0             0             0             0
+
+
+           THETA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP            0
+ G3ENGSP            0             0
+ G1SPNSP            0             0             0
+ G3SPNSP            0             0             0             0
+ D_G1EL             0             0             0             0             0
+
+
+           ALPHA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+                  1             2             3             4             0
+
+
+           BETA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP            0             0             0             0             5
+ G3ENGSP            6             0             7             0             8
+ G1SPNSP            0             0             0             0             9
+ G3SPNSP           10             0            11             0            12
+ D_G1EL             0             0             0             0             0
+
+
+           PSI
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP           13
+ G3ENGSP            0            14
+ G1SPNSP           15             0            16
+ G3SPNSP            0            17             0            18
+ D_G1EL             0             0             0             0             0
+
+
+     STARTING VALUES
+
+
+           NU
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        1.000         0.000         0.000         0.000         0.000
+ G3ENGSP        0.000         1.000         0.000         0.000         0.000
+ G1SPNSP        0.000         0.000         1.000         0.000         0.000
+ G3SPNSP        0.000         0.000         0.000         1.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        0.000
+ G3ENGSP        0.000         0.000
+ G1SPNSP        0.000         0.000         0.000
+ G3SPNSP        0.000         0.000         0.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+                2.027         8.788         2.739         5.445         0.637
+
+
+           BETA
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        0.000         0.000         0.000         0.000         0.000
+ G3ENGSP        0.000         0.000         0.000         0.000         0.000
+ G1SPNSP        0.000         0.000         0.000         0.000         0.000
+ G3SPNSP        0.000         0.000         0.000         0.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        5.758
+ G3ENGSP        0.000        16.049
+ G1SPNSP        0.000         0.000         2.906
+ G3SPNSP        0.000         0.000         0.000         4.843
+ D_G1EL         0.000         0.000         0.000         0.000         0.231
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    /Users/moonys/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Research/spn-eng-spelling-mplus/Figure3-English-S
+
+     Beginning Time:  10:12:01
+        Ending Time:  10:12:01
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

@@ -1,0 +1,376 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+03/23/2026  10:10 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+    Figure 3: Relations between English and Spanish Correctness Scores in Grades 1 and 3
+
+  DATA:
+    FILE = Eng-SpnFinalData.dat;
+
+  VARIABLE:
+    NAMES =
+      child_id sch_id d_female race d_hisp d_white d_asian d_g1farl d_g1el
+      d_g1serv d_g1sspe d_g1sld d_g1saut d_g1soth d_g1dual d_g3farl d_g3el
+      g3el_cat d_g3dual d_g3serv d_g3attr d_chdual g1engmis g1engsp g1engdl
+      g1engdlr g1engcs g1engtd g3engmis g3engsp g3engdl g3engdlr g3engcs
+      g3engtd g1spnmis g1spnsp g1spndl g1spndlr g1spncs g1spntd g3spnmis
+      g3spnsp g3spndl g3spndlr g3spncs g3spntd zg1engsp zg1engdl zg1engcs
+      zg1engtd zg3engsp zg3engdl zg3engcs zg3engtd zg1spnsp zg1spndl zg1spncs
+      zg1spntd zg3spnsp zg3spndl zg3spncs zg3spntd gender ethnic s_g1farl
+      s_g1serv s_g3serv;
+
+    MISSING ARE ALL (9999);
+
+    USEVARIABLES =
+      g1engsp g3engsp g1spnsp g3spnsp d_g1el;
+
+  ANALYSIS:
+    ITERATIONS = 10000;
+    CONVERGENCE = 0.001;
+    ESTIMATOR = MLR;
+
+  MODEL:
+    ! Cross-lagged effects
+    g3engsp ON g1engsp g1spnsp;
+    g3spnsp ON g1engsp g1spnsp;
+
+    ! Within-time covariances
+    g1engsp WITH g1spnsp;
+    g3engsp WITH g3spnsp;
+
+    ! Covariates
+    g1engsp g3engsp g1spnsp g3spnsp ON d_g1el;
+
+  OUTPUT:
+    STDYX MODINDICES SAMPSTAT;
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  1
+*** WARNING
+  Data set contains cases with missing on all variables except
+  x-variables.  These cases were not included in the analysis.
+  Number of cases with missing on all variables except x-variables:  1
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Figure 3: Relations between English and Spanish Correctness Scores in Grades 1 and 3
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         209
+
+Number of dependent variables                                    4
+Number of independent variables                                  1
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   G1ENGSP     G3ENGSP     G1SPNSP     G3SPNSP
+
+Observed independent variables
+   D_G1EL
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                 10000
+Convergence criterion                                    0.100D-02
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  Eng-SpnFinalData.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             9
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        0.904
+ G3ENGSP        0.636         0.722
+ G1SPNSP        0.866         0.636         0.904
+ G3SPNSP        0.636         0.718         0.636         0.722
+ D_G1EL         0.904         0.722         0.904         0.722         1.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+                1.876         8.763         2.741         5.124         0.627
+
+
+           Covariances
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP       11.419
+ G3ENGSP        9.565        31.869
+ G1SPNSP        0.966         4.446         5.733
+ G3SPNSP       -0.812         6.362         5.066         9.537
+ D_G1EL        -0.431        -0.674        -0.045         0.138         0.234
+
+
+           Correlations
+              G1ENGSP       G3ENGSP       G1SPNSP       G3SPNSP       D_G1EL
+              ________      ________      ________      ________      ________
+ G1ENGSP        1.000
+ G3ENGSP        0.501         1.000
+ G1SPNSP        0.119         0.329         1.000
+ G3SPNSP       -0.078         0.365         0.685         1.000
+ D_G1EL        -0.264        -0.247        -0.039         0.093         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -1841.453
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     G1ENGSP               1.979       2.536       0.000   49.21%       0.000      0.000      1.000
+             189.000      11.301       6.723      18.000    0.53%       1.000      3.000
+     G3ENGSP               8.762       0.004       0.000    3.97%       3.000      6.000      9.000
+             151.000      31.387      -1.393      18.000    3.31%      11.000     15.000
+     G1SPNSP               2.709       0.825       0.000   17.46%       1.000      1.000      2.000
+             189.000       5.709      -0.312       9.000    1.06%       3.000      5.000
+     G3SPNSP               5.344       0.023       0.000    5.30%       2.000      4.000      5.000
+             151.000       9.762      -1.137      12.000    0.66%       7.000      9.000
+     D_G1EL                0.627      -0.524       0.000   37.32%       0.000      1.000      1.000
+             209.000       0.234      -1.725       1.000   62.68%       1.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       18
+
+Loglikelihood
+
+          H0 Value                       -1696.708
+          H0 Scaling Correction Factor      1.1179
+            for MLR
+          H1 Value                       -1696.708
+          H1 Scaling Correction Factor      1.1179
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    3429.417
+          Bayesian (BIC)                  3489.579
+          Sample-Size Adjusted BIC        3432.545
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000*
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+          Scaling Correction Factor         1.0000
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.000
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            184.979
+          Degrees of Freedom                    10
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ G3ENGSP  ON
+    G1ENGSP            0.730      0.114      6.412      0.000
+    G1SPNSP            0.641      0.156      4.101      0.000
+    D_G1EL            -1.413      0.815     -1.733      0.083
+
+ G3SPNSP  ON
+    G1ENGSP           -0.128      0.043     -2.967      0.003
+    G1SPNSP            0.909      0.065     14.086      0.000
+    D_G1EL             0.530      0.387      1.372      0.170
+
+ G1ENGSP  ON
+    D_G1EL            -1.844      0.566     -3.258      0.001
+
+ G1SPNSP  ON
+    D_G1EL            -0.192      0.362     -0.529      0.596
+
+ G1ENGSP  WITH
+    G1SPNSP            0.884      0.700      1.262      0.207
+
+ G3ENGSP  WITH
+    G3SPNSP            3.902      0.867      4.499      0.000
+
+ Intercepts
+    G1ENGSP            3.032      0.509      5.951      0.000
+    G3ENGSP            6.521      0.795      8.204      0.000
+    G1SPNSP            2.862      0.299      9.576      0.000
+    G3SPNSP            2.539      0.371      6.850      0.000
+
+ Residual Variances
+    G1ENGSP           10.623      2.174      4.887      0.000
+    G3ENGSP           21.085      1.817     11.604      0.000
+    G1SPNSP            5.725      0.531     10.780      0.000
+    G3SPNSP            4.753      0.561      8.465      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.175E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ G3ENGSP  ON
+    G1ENGSP            0.437      0.063      6.966      0.000
+    G1SPNSP            0.272      0.067      4.045      0.000
+    D_G1EL            -0.121      0.069     -1.743      0.081
+
+ G3SPNSP  ON
+    G1ENGSP           -0.140      0.051     -2.747      0.006
+    G1SPNSP            0.705      0.043     16.443      0.000
+    D_G1EL             0.083      0.060      1.378      0.168
+
+ G1ENGSP  ON
+    D_G1EL            -0.264      0.066     -3.994      0.000
+
+ G1SPNSP  ON
+    D_G1EL            -0.039      0.073     -0.532      0.595
+
+ G1ENGSP  WITH
+    G1SPNSP            0.113      0.089      1.275      0.202
+
+ G3ENGSP  WITH
+    G3SPNSP            0.390      0.074      5.256      0.000
+
+ Intercepts
+    G1ENGSP            0.897      0.093      9.630      0.000
+    G3ENGSP            1.155      0.148      7.808      0.000
+    G1SPNSP            1.195      0.108     11.016      0.000
+    G3SPNSP            0.822      0.134      6.143      0.000
+
+ Residual Variances
+    G1ENGSP            0.930      0.035     26.654      0.000
+    G3ENGSP            0.662      0.053     12.411      0.000
+    G1SPNSP            0.998      0.006    176.826      0.000
+    G3SPNSP            0.498      0.053      9.356      0.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    G1ENGSP            0.070      0.035      1.997      0.046
+    G3ENGSP            0.338      0.053      6.349      0.000
+    G1SPNSP            0.002      0.006      0.266      0.790
+    G3SPNSP            0.502      0.053      9.417      0.000
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+
+ON Statements
+
+G3SPNSP  ON G3ENGSP              999.000     0.000      0.000        0.000
+G3SPNSP  ON G3SPNSP              999.000     0.000      0.000        0.000
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    /Users/moonys/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Research/spn-eng-spelling-mplus/Figure3-English-S
+
+     Beginning Time:  10:10:13
+        Ending Time:  10:10:13
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen
