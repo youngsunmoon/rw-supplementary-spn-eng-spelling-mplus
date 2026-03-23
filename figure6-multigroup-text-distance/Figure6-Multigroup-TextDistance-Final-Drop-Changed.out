@@ -1,0 +1,840 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+03/23/2026  10:48 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+    Figure 6: Sensitivity Check - Exclude program change
+
+  DATA:
+    FILE = Eng-SpnFinalData(drop_chdual).dat;
+
+  VARIABLE:
+    NAMES =
+      child_id sch_id d_female race d_hisp d_white d_asian d_g1farl d_g1el
+      d_g1serv d_g1sspe d_g1sld d_g1saut d_g1soth d_g1dual d_g3farl d_g3el
+      g3el_cat d_g3dual d_g3serv d_g3attr d_chdual g1engmis g1engsp g1engdl
+      g1engdlr g1engcs g1engtd g3engmis g3engsp g3engdl g3engdlr g3engcs
+      g3engtd g1spnmis g1spnsp g1spndl g1spndlr g1spncs g1spntd g3spnmis
+      g3spnsp g3spndl g3spndlr g3spncs g3spntd zg1engsp zg1engdl zg1engcs
+      zg1engtd zg3engsp zg3engdl zg3engcs zg3engtd zg1spnsp zg1spndl zg1spncs
+      zg1spntd zg3spnsp zg3spndl zg3spncs zg3spntd gender ethnic s_g1farl
+      s_g1serv s_g3serv;
+
+    USEVARIABLES =
+    zg1engtd zg3engtd zg1spntd zg3spntd d_g1el;
+
+    CLUSTER = sch_id;
+    MISSING ARE ALL (9999);
+
+    GROUPING =
+    	d_g1dual (0 = English 1 = Dual);
+
+  ANALYSIS:
+    TYPE = COMPLEX;
+    ESTIMATOR = ML;
+    ITERATIONS = 10000;
+    CONVERGENCE = 0.001;
+
+  MODEL:
+  	!Model English Immersion
+  	zg3engtd ON zg1engtd (a);
+  	zg3engtd ON zg1spntd ;
+  	zg3spntd ON zg1engtd (c);
+  	zg3spntd ON zg1spntd (d);
+
+  	zg1engtd WITH zg1spntd (e);
+  	zg3engtd WITH zg3spntd (f);
+
+  	zg1engtd zg3engtd zg1spntd zg3spntd ON d_g1el;
+
+  	!Model Dual Immersion
+  	zg3engtd ON zg1engtd (a);
+  	zg3engtd ON zg1spntd ;
+  	zg3spntd ON zg1engtd (c);
+  	zg3spntd ON zg1spntd (d);
+
+  	zg1engtd WITH zg1spntd (e);
+  	zg3engtd WITH zg3spntd (f);
+
+  	zg1engtd zg3engtd zg1spntd zg3spntd ON d_g1el;
+
+
+  OUTPUT:
+    STDYX MODINDICES SAMPSTAT;
+
+
+
+*** WARNING in ANALYSIS command
+  Use ESTIMATOR=MLR instead of ESTIMATOR=ML for TYPE=COMPLEX.
+  Default estimator will be used.
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  1
+*** WARNING
+  Data set contains cases with missing on all variables except
+  x-variables.  These cases were not included in the analysis.
+  Number of cases with missing on all variables except x-variables:  1
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Figure 6: Sensitivity Check - Exclude program change
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 2
+Number of observations
+   Group ENGLISH                                                81
+   Group DUAL                                                  123
+   Total sample size                                           204
+
+Number of dependent variables                                    4
+Number of independent variables                                  1
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   ZG1ENGTD    ZG3ENGTD    ZG1SPNTD    ZG3SPNTD
+
+Observed independent variables
+   D_G1EL
+
+Variables with special functions
+
+  Grouping variable     D_G1DUAL
+  Cluster variable      SCH_ID
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                 10000
+Convergence criterion                                    0.100D-02
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  Eng-SpnFinalData(drop_chdual).dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+   Group ENGLISH
+     Number of missing data patterns             7
+     Number of clusters                          4
+
+
+   Group DUAL
+     Number of missing data patterns             8
+     Number of clusters                          3
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR ENGLISH
+
+
+           Covariance Coverage
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.963
+ ZG3ENGTD       0.593         0.617
+ ZG1SPNTD       0.901         0.568         0.938
+ ZG3SPNTD       0.580         0.605         0.556         0.605
+ D_G1EL         0.963         0.617         0.938         0.605         1.000
+
+
+     PROPORTION OF DATA PRESENT FOR DUAL
+
+
+           Covariance Coverage
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.862
+ ZG3ENGTD       0.650         0.780
+ ZG1SPNTD       0.837         0.667         0.878
+ ZG3SPNTD       0.659         0.780         0.675         0.789
+ D_G1EL         0.862         0.780         0.878         0.789         1.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS FOR ENGLISH
+
+
+           Means
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+               -0.472        -0.117         0.688         0.999         0.543
+
+
+           Covariances
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       1.068
+ ZG3ENGTD       0.643         0.660
+ ZG1SPNTD       0.527         0.334         0.985
+ ZG3SPNTD       0.482         0.441         0.324         0.680
+ D_G1EL         0.113         0.127        -0.038         0.092         0.248
+
+
+           Correlations
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       1.000
+ ZG3ENGTD       0.766         1.000
+ ZG1SPNTD       0.514         0.414         1.000
+ ZG3SPNTD       0.566         0.658         0.396         1.000
+ D_G1EL         0.219         0.314        -0.078         0.225         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR DUAL
+
+
+           Means
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+                0.277         0.135        -0.475        -0.501         0.699
+
+
+           Covariances
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.650
+ ZG3ENGTD       0.397         1.243
+ ZG1SPNTD       0.327         0.450         0.537
+ ZG3SPNTD       0.221         0.372         0.279         0.407
+ D_G1EL         0.078         0.076         0.073         0.010         0.210
+
+
+           Correlations
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       1.000
+ ZG3ENGTD       0.442         1.000
+ ZG1SPNTD       0.553         0.551         1.000
+ ZG3SPNTD       0.429         0.522         0.596         1.000
+ D_G1EL         0.212         0.149         0.217         0.036         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -848.900
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS FOR ENGLISH
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     ZG1ENGTD             -0.463       0.809      -2.274    1.28%      -1.276     -0.901     -0.612
+              78.000       1.085       0.240       2.413    1.28%      -0.430      0.307
+     ZG3ENGTD             -0.165       0.610      -1.069    6.00%      -0.917     -0.621     -0.420
+              50.000       0.600      -0.845       1.568    2.00%      -0.101      0.620
+     ZG1SPNTD              0.656       0.532      -0.936    1.32%      -0.229      0.167      0.297
+              76.000       0.944      -1.023       2.584    2.63%       0.596      1.810
+     ZG3SPNTD              0.970       0.768      -0.469    2.04%       0.215      0.690      0.817
+              49.000       0.661      -0.003       3.012    2.04%       0.952      1.516
+     D_G1EL                0.543      -0.173       0.000   45.68%       0.000      0.000      1.000
+              81.000       0.248      -1.970       1.000   54.32%       1.000      1.000
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS FOR DUAL
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     ZG1ENGTD              0.291      -0.423      -1.913    0.94%      -0.443      0.133      0.348
+             106.000       0.660       0.037       2.032    0.94%       0.466      1.081
+     ZG3ENGTD              0.087       1.442      -1.069    2.08%      -0.800     -0.594     -0.275
+              96.000       1.212       2.375       4.633    1.04%       0.078      1.112
+     ZG1SPNTD             -0.462       1.093      -1.376    0.93%      -1.082     -0.889     -0.706
+             108.000       0.551       0.524       1.999    0.93%      -0.477      0.043
+     ZG3SPNTD             -0.536       2.202      -1.333    1.03%      -0.968     -0.783     -0.709
+              97.000       0.395       5.807       2.438    1.03%      -0.622     -0.311
+     D_G1EL                0.699      -0.869       0.000   30.08%       0.000      1.000      1.000
+             123.000       0.210      -1.245       1.000   69.92%       1.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+     THE STANDARD ERRORS OF THE MODEL PARAMETER ESTIMATES MAY NOT BE
+     TRUSTWORTHY FOR SOME PARAMETERS DUE TO A NON-POSITIVE DEFINITE
+     FIRST-ORDER DERIVATIVE PRODUCT MATRIX.  THIS MAY BE DUE TO THE STARTING
+     VALUES BUT MAY ALSO BE AN INDICATION OF MODEL NONIDENTIFICATION.  THE
+     CONDITION NUMBER IS      -0.916D-16.  PROBLEM INVOLVING THE FOLLOWING PARAMETER:
+     Parameter 5, Group ENGLISH: ZG1ENGTD ON D_G1EL
+
+     THIS IS MOST LIKELY DUE TO HAVING MORE PARAMETERS THAN THE NUMBER
+     OF CLUSTERS MINUS THE NUMBER OF STRATA WITH MORE THAN ONE CLUSTER.
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       31
+
+Loglikelihood
+
+          H0 Value                        -716.124
+          H0 Scaling Correction Factor      1.5956
+            for MLR
+          H1 Value                        -711.770
+          H1 Scaling Correction Factor      1.3885
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    1494.247
+          Bayesian (BIC)                  1597.109
+          Sample-Size Adjusted BIC        1498.892
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             82.969*
+          Degrees of Freedom                     5
+          P-Value                           0.0000
+          Scaling Correction Factor         0.1050
+            for MLR
+
+Chi-Square Contribution From Each Group
+
+          ENGLISH                           50.710
+          DUAL                              32.259
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.391
+          90 Percent C.I.                    0.320  0.467
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.617
+          TLI                                0.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                            223.769
+          Degrees of Freedom                    20
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.062
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Group ENGLISH
+
+ ZG3ENGTD ON
+    ZG1ENGTD           0.440      0.072      6.097      0.000
+    ZG1SPNTD           0.148      0.060      2.462      0.014
+    D_G1EL             0.313      0.112      2.794      0.005
+
+ ZG3SPNTD ON
+    ZG1ENGTD           0.190      0.041      4.590      0.000
+    ZG1SPNTD           0.359      0.066      5.406      0.000
+    D_G1EL             0.266      0.142      1.867      0.062
+
+ ZG1ENGTD ON
+    D_G1EL             0.457      0.087      5.253      0.000
+
+ ZG1SPNTD ON
+    D_G1EL            -0.128      0.225     -0.568      0.570
+
+ ZG1ENGTD WITH
+    ZG1SPNTD           0.366      0.068      5.385      0.000
+
+ ZG3ENGTD WITH
+    ZG3SPNTD           0.137      0.020      6.694      0.000
+
+ Intercepts
+    ZG1ENGTD          -0.722      0.210     -3.433      0.001
+    ZG3ENGTD          -0.190      0.139     -1.365      0.172
+    ZG1SPNTD           0.756      0.436      1.734      0.083
+    ZG3SPNTD           0.690      0.141      4.891      0.000
+
+ Residual Variances
+    ZG1ENGTD           0.902      0.256      3.517      0.000
+    ZG3ENGTD           0.258      0.026      9.884      0.000
+    ZG1SPNTD           0.854      0.139      6.150      0.000
+    ZG3SPNTD           0.452      0.114      3.978      0.000
+
+Group DUAL
+
+ ZG3ENGTD ON
+    ZG1ENGTD           0.440      0.072      6.097      0.000
+    ZG1SPNTD           0.528      0.087      6.045      0.000
+    D_G1EL             0.016      0.178      0.088      0.930
+
+ ZG3SPNTD ON
+    ZG1ENGTD           0.190      0.041      4.590      0.000
+    ZG1SPNTD           0.359      0.066      5.406      0.000
+    D_G1EL            -0.147      0.018     -8.073      0.000
+
+ ZG1ENGTD ON
+    D_G1EL             0.374      0.157      2.389      0.017
+
+ ZG1SPNTD ON
+    D_G1EL             0.345      0.123      2.818      0.005
+
+ ZG1ENGTD WITH
+    ZG1SPNTD           0.366      0.068      5.385      0.000
+
+ ZG3ENGTD WITH
+    ZG3SPNTD           0.137      0.020      6.694      0.000
+
+ Intercepts
+    ZG1ENGTD           0.014      0.149      0.091      0.928
+    ZG3ENGTD           0.252      0.108      2.339      0.019
+    ZG1SPNTD          -0.715      0.107     -6.705      0.000
+    ZG3SPNTD          -0.284      0.050     -5.705      0.000
+
+ Residual Variances
+    ZG1ENGTD           0.681      0.090      7.546      0.000
+    ZG3ENGTD           0.848      0.312      2.715      0.007
+    ZG1SPNTD           0.567      0.094      6.053      0.000
+    ZG3SPNTD           0.259      0.088      2.948      0.003
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.736E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Group ENGLISH
+
+ ZG3ENGTD ON
+    ZG1ENGTD           0.574      0.091      6.278      0.000
+    ZG1SPNTD           0.183      0.079      2.332      0.020
+    D_G1EL             0.209      0.069      3.040      0.002
+
+ ZG3SPNTD ON
+    ZG1ENGTD           0.227      0.061      3.733      0.000
+    ZG1SPNTD           0.407      0.088      4.632      0.000
+    D_G1EL             0.162      0.091      1.777      0.076
+
+ ZG1ENGTD ON
+    D_G1EL             0.233      0.040      5.842      0.000
+
+ ZG1SPNTD ON
+    D_G1EL            -0.069      0.116     -0.592      0.554
+
+ ZG1ENGTD WITH
+    ZG1SPNTD           0.417      0.109      3.810      0.000
+
+ ZG3ENGTD WITH
+    ZG3SPNTD           0.401      0.089      4.497      0.000
+
+ Intercepts
+    ZG1ENGTD          -0.739      0.301     -2.457      0.014
+    ZG3ENGTD          -0.254      0.179     -1.418      0.156
+    ZG1SPNTD           0.816      0.401      2.036      0.042
+    ZG3SPNTD           0.845      0.132      6.378      0.000
+
+ Residual Variances
+    ZG1ENGTD           0.946      0.019     50.839      0.000
+    ZG3ENGTD           0.461      0.060      7.644      0.000
+    ZG1SPNTD           0.995      0.016     62.422      0.000
+    ZG3SPNTD           0.677      0.067     10.113      0.000
+
+Group DUAL
+
+ ZG3ENGTD ON
+    ZG1ENGTD           0.321      0.040      8.065      0.000
+    ZG1SPNTD           0.352      0.103      3.420      0.001
+    D_G1EL             0.006      0.071      0.087      0.930
+
+ ZG3SPNTD ON
+    ZG1ENGTD           0.251      0.046      5.474      0.000
+    ZG1SPNTD           0.433      0.108      4.004      0.000
+    D_G1EL            -0.106      0.018     -5.964      0.000
+
+ ZG1ENGTD ON
+    D_G1EL             0.204      0.079      2.572      0.010
+
+ ZG1SPNTD ON
+    D_G1EL             0.206      0.077      2.667      0.008
+
+ ZG1ENGTD WITH
+    ZG1SPNTD           0.589      0.066      8.964      0.000
+
+ ZG3ENGTD WITH
+    ZG3SPNTD           0.293      0.089      3.286      0.001
+
+ Intercepts
+    ZG1ENGTD           0.016      0.178      0.091      0.928
+    ZG3ENGTD           0.218      0.108      2.022      0.043
+    ZG1SPNTD          -0.929      0.181     -5.126      0.000
+    ZG3SPNTD          -0.445      0.073     -6.068      0.000
+
+ Residual Variances
+    ZG1ENGTD           0.959      0.032     29.717      0.000
+    ZG3ENGTD           0.635      0.107      5.950      0.000
+    ZG1SPNTD           0.958      0.032     30.133      0.000
+    ZG3SPNTD           0.636      0.088      7.230      0.000
+
+
+R-SQUARE
+
+Group ENGLISH
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    ZG1ENGTD           0.054      0.019      2.921      0.003
+    ZG3ENGTD           0.539      0.060      8.927      0.000
+    ZG1SPNTD           0.005      0.016      0.296      0.767
+    ZG3SPNTD           0.323      0.067      4.834      0.000
+
+Group DUAL
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    ZG1ENGTD           0.041      0.032      1.286      0.198
+    ZG3ENGTD           0.365      0.107      3.419      0.001
+    ZG1SPNTD           0.042      0.032      1.334      0.182
+    ZG3SPNTD           0.364      0.088      4.136      0.000
+
+
+MODEL MODIFICATION INDICES
+
+NOTE:  Modification indices for direct effects of observed dependent variables
+regressed on covariates may not be included.  To include these, request
+MODINDICES (ALL).
+
+Minimum M.I. value for printing the modification index    10.000
+
+                                   M.I.     E.P.C.  Std E.P.C.  StdYX E.P.C.
+Group ENGLISH
+
+
+ON Statements
+
+ZG1ENGTD ON ZG1ENGTD              33.046     0.656      0.656        0.656
+ZG1ENGTD ON ZG3ENGTD              56.123     0.784      0.784        0.601
+ZG1ENGTD ON ZG1SPNTD              32.694     0.279      0.279        0.265
+ZG1ENGTD ON ZG3SPNTD              33.240     0.356      0.356        0.298
+ZG3ENGTD ON ZG1ENGTD              13.049     0.040      0.040        0.052
+ZG3ENGTD ON ZG3ENGTD              10.487     0.326      0.326        0.326
+ZG1SPNTD ON ZG1ENGTD              32.601     0.264      0.264        0.278
+ZG1SPNTD ON ZG1SPNTD              32.656     0.652      0.652        0.652
+ZG3SPNTD ON ZG1SPNTD              16.548    -0.111     -0.111       -0.126
+
+WITH Statements
+
+ZG3ENGTD WITH ZG1ENGTD            13.066     0.146      0.146        0.302
+ZG1SPNTD WITH ZG1ENGTD            32.574     0.170      0.170        0.194
+ZG1SPNTD WITH ZG3ENGTD            13.067    -0.340     -0.340       -0.725
+ZG3SPNTD WITH ZG1SPNTD            22.683    -0.160     -0.160       -0.258
+D_G1EL   WITH ZG3ENGTD           999.000     0.000      0.000        0.000
+D_G1EL   WITH ZG1SPNTD           999.000     0.000      0.000        0.000
+
+Group DUAL
+
+
+ON Statements
+
+ZG1ENGTD ON ZG1ENGTD              32.394    -0.650     -0.650       -0.650
+ZG1ENGTD ON ZG3ENGTD              35.419    -0.167     -0.167       -0.229
+ZG1ENGTD ON ZG1SPNTD              32.840    -0.422     -0.422       -0.385
+ZG1ENGTD ON ZG3SPNTD              46.151    -0.467     -0.467       -0.354
+ZG3ENGTD ON ZG1ENGTD              12.982    -0.155     -0.155       -0.113
+ZG3ENGTD ON ZG3ENGTD              10.305    -0.323     -0.323       -0.323
+ZG1SPNTD ON ZG1ENGTD              32.890    -0.352     -0.352       -0.385
+ZG1SPNTD ON ZG1SPNTD              32.784    -0.654     -0.654       -0.654
+ZG3SPNTD ON ZG1SPNTD              16.526     0.059      0.059        0.072
+
+WITH Statements
+
+ZG3ENGTD WITH ZG1ENGTD            13.080    -0.087     -0.087       -0.114
+ZG1SPNTD WITH ZG1ENGTD            32.850    -0.068     -0.068       -0.110
+ZG1SPNTD WITH ZG3ENGTD            13.186     0.135      0.135        0.195
+ZG3SPNTD WITH ZG1SPNTD            22.778     0.084      0.084        0.219
+D_G1EL   WITH ZG3ENGTD           999.000     0.000      0.000        0.000
+D_G1EL   WITH ZG3SPNTD           999.000     0.000      0.000        0.000
+
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR ENGLISH
+
+
+           NU
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           LAMBDA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD           0             0             0             0             0
+ ZG3ENGTD           0             0             0             0             0
+ ZG1SPNTD           0             0             0             0             0
+ ZG3SPNTD           0             0             0             0             0
+ D_G1EL             0             0             0             0             0
+
+
+           THETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD           0
+ ZG3ENGTD           0             0
+ ZG1SPNTD           0             0             0
+ ZG3SPNTD           0             0             0             0
+ D_G1EL             0             0             0             0             0
+
+
+           ALPHA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+                  1             2             3             4             0
+
+
+           BETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD           0             0             0             0             5
+ ZG3ENGTD           6             0             7             0             8
+ ZG1SPNTD           0             0             0             0             9
+ ZG3SPNTD          10             0            11             0            12
+ D_G1EL             0             0             0             0             0
+
+
+           PSI
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD          13
+ ZG3ENGTD           0            14
+ ZG1SPNTD          15             0            16
+ ZG3SPNTD           0            17             0            18
+ D_G1EL             0             0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR DUAL
+
+
+           NU
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           LAMBDA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD           0             0             0             0             0
+ ZG3ENGTD           0             0             0             0             0
+ ZG1SPNTD           0             0             0             0             0
+ ZG3SPNTD           0             0             0             0             0
+ D_G1EL             0             0             0             0             0
+
+
+           THETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD           0
+ ZG3ENGTD           0             0
+ ZG1SPNTD           0             0             0
+ ZG3SPNTD           0             0             0             0
+ D_G1EL             0             0             0             0             0
+
+
+           ALPHA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+                 19            20            21            22             0
+
+
+           BETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD           0             0             0             0            23
+ ZG3ENGTD           6             0            24             0            25
+ ZG1SPNTD           0             0             0             0            26
+ ZG3SPNTD          10             0            11             0            27
+ D_G1EL             0             0             0             0             0
+
+
+           PSI
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD          28
+ ZG3ENGTD           0            29
+ ZG1SPNTD          15             0            30
+ ZG3SPNTD           0            17             0            31
+ D_G1EL             0             0             0             0             0
+
+
+     STARTING VALUES FOR ENGLISH
+
+
+           NU
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       1.000         0.000         0.000         0.000         0.000
+ ZG3ENGTD       0.000         1.000         0.000         0.000         0.000
+ ZG1SPNTD       0.000         0.000         1.000         0.000         0.000
+ ZG3SPNTD       0.000         0.000         0.000         1.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.000
+ ZG3ENGTD       0.000         0.000
+ ZG1SPNTD       0.000         0.000         0.000
+ ZG3SPNTD       0.000         0.000         0.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+               -0.463        -0.165         0.656         0.970         0.543
+
+
+           BETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.000         0.000         0.000         0.000         0.000
+ ZG3ENGTD       0.000         0.000         0.000         0.000         0.000
+ ZG1SPNTD       0.000         0.000         0.000         0.000         0.000
+ ZG3SPNTD       0.000         0.000         0.000         0.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.543
+ ZG3ENGTD       0.000         0.300
+ ZG1SPNTD       0.000         0.000         0.472
+ ZG3SPNTD       0.000         0.000         0.000         0.330
+ D_G1EL         0.000         0.000         0.000         0.000         0.248
+
+
+     STARTING VALUES FOR DUAL
+
+
+           NU
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       1.000         0.000         0.000         0.000         0.000
+ ZG3ENGTD       0.000         1.000         0.000         0.000         0.000
+ ZG1SPNTD       0.000         0.000         1.000         0.000         0.000
+ ZG3SPNTD       0.000         0.000         0.000         1.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.000
+ ZG3ENGTD       0.000         0.000
+ ZG1SPNTD       0.000         0.000         0.000
+ ZG3SPNTD       0.000         0.000         0.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+               -0.463        -0.165         0.656         0.970         0.699
+
+
+           BETA
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.000         0.000         0.000         0.000         0.000
+ ZG3ENGTD       0.000         0.000         0.000         0.000         0.000
+ ZG1SPNTD       0.000         0.000         0.000         0.000         0.000
+ ZG3SPNTD       0.000         0.000         0.000         0.000         0.000
+ D_G1EL         0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              ZG1ENGTD      ZG3ENGTD      ZG1SPNTD      ZG3SPNTD      D_G1EL
+              ________      ________      ________      ________      ________
+ ZG1ENGTD       0.543
+ ZG3ENGTD       0.000         0.300
+ ZG1SPNTD       0.000         0.000         0.472
+ ZG3SPNTD       0.000         0.000         0.000         0.330
+ D_G1EL         0.000         0.000         0.000         0.000         0.210
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    /Users/moonys/Library/Mobile Documents/com~apple~CloudDocs/Desktop/Research/spn-eng-spelling-mplus/Figure6-Multigrou
+
+     Beginning Time:  10:48:11
+        Ending Time:  10:48:11
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen
